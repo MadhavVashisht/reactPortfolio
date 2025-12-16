@@ -3,25 +3,25 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const experiences = [
   {
+    role: "Data Analyst & Automation Manager Intern",
+    company: "Airtel",
+    duration: "2025",
+    description:
+      "Focused on automating reporting workflows and analyzing operational data to improve efficiency, accuracy, and turnaround time using Python and structured data analysis.",
+  },
+  {
     role: "Web Developer",
-    company: "Brain Mentors",
-    duration: "2022",
-    description:
-      "Built high-performance apps, integrated AI features, improved engagement by 10%.",
+    company: "Saviskar Techno-Cultural Fest CGC University",
+    duration: "2025",
+    description: "Solely developed the Saviskar official website, delivering a modern, responsive, and brand-centric web experience from concept to deployment.",
   },
-  {
-    role: "Web Developer Intern",
-    company: "Mobisoft Technologies",
-    duration: "2022 - 2023",
-    description: "Gained hands-on web development experience.",
-  },
-  {
-    role: "Graduate Engineer",
-    company: "HCL Technologies",
-    duration: "2024 - 2025",
-    description:
-      "Built frontend of GenAI-powered PV Intake App with Next.js & TS for US client.",
-  },
+  // {
+  //   role: "Graduate Engineer",
+  //   company: "HCL Technologies",
+  //   duration: "2024 - 2025",
+  //   description:
+  //     "Built frontend of GenAI-powered PV Intake App with Next.js & TS for US client.",
+  // },
 ];
 
 function ExperienceItem({ exp, idx, start, end, scrollYProgress, layout }) {

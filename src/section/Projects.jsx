@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import img1 from "../assets/img1.JPG";
-import img2 from "../assets/img2.JPG";
-import img3 from "../assets/img3.JPG";
-import photo1 from "../assets/photo1.JPG";
-import photo2 from "../assets/photo2.PNG";
-import photo3 from "../assets/photo3.png";
+import hotelDesktop from "../assets/hotelD.jpg"
+import hotelMobile from "../assets/hotelM.jpg"
+import jarvisDesktop from "../assets/jarvisD.jpg"
+import jarvisMobile from "../assets/Jarvism.jpg"
+import setaDesktop from "../assets/SETAD.jpg"
+import setaMobile from "../assets/SetaM.jpg"
+import saviskarDesktop from "../assets/SaviskarD.png"
+import saviskarMobile from "../assets/SaviskarM.jpg"
 import {
   motion,
   AnimatePresence,
@@ -48,22 +50,32 @@ export default function Projects() {
   const projects = useMemo(
     () => [
       {
-        title: "nk studio",
-        link: "https://www.nk.studio/",
-        bgColor: "#0d4d3d",
-        image: isMobile ? photo1 : img1,
+        title: "Hotel Management System",
+        description: "Python + SQL Backend Logic",
+        link: "https://github.com/MadhavVashisht/Hotel-Management",
+        bgColor: "#2C3E50", // Professional Slate Blue
+        image: isMobile ? hotelMobile : hotelDesktop,
       },
       {
-        title: "Gamily",
-        link: "https://gamilyapp.com/",
-        bgColor: "#3884d3",
-        image: isMobile ? photo2 : img2,
+        title: "Jarvis AI Assistant",
+        description: "Voice Automation & Scripting",
+        link: "https://github.com/MadhavVashisht/Jarvis",
+        bgColor: "#0f172a", // Dark Tech/Night Blue
+        image: isMobile ? jarvisMobile : jarvisDesktop,
       },
       {
-        title: "Hungry Tiger",
-        link: "https://www.eathungrytiger.com/",
-        bgColor: "#dc9317",
-        image: isMobile ? photo3 : img3,
+        title: "SETA Automation",
+        description: "Excel to Telegram Bot",
+        link: "https://github.com/MadhavVashisht/SETA-Telegram-Bot",
+        bgColor: "#229ED9", // Telegram Brand Blue
+        image: isMobile ? setaMobile : setaDesktop,
+      },
+      {
+        title: "SAVISKAR Official Site",
+        description: "Live Event Website",
+        link: "https://saviskar.co.in",
+        bgColor: "#10B981", // Emerald/Brand Green (Update this Hex to match exact logo if needed)
+        image: isMobile ? saviskarMobile : saviskarDesktop,
       },
     ],
     [isMobile]

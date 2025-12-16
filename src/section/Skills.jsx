@@ -1,31 +1,40 @@
-import { FaJava, FaReact } from "react-icons/fa";
 import {
-  SiNextdotjs,
-  SiTypescript,
+  FaJava,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaGitAlt,
+} from "react-icons/fa";
+import {
   SiTailwindcss,
-  SiFastapi,
-  SiPython,
-  SiDocker,
+  SiOpencv,
+  SiFirebase,
   SiMongodb,
-  SiAngular,
+  SiMysql,
 } from "react-icons/si";
-import { DiNodejsSmall } from "react-icons/di";
+import { TbAutomation } from "react-icons/tb";
 import { motion, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 export default function Skills() {
   const skills = [
     { icon: <FaJava />, name: "Java" },
-    { icon: <FaReact />, name: "React" },
-    { icon: <SiNextdotjs />, name: "Next.js" },
-    { icon: <SiTypescript />, name: "TypeScript" },
+    { icon: <FaHtml5 />, name: "HTML5" },
+    { icon: <FaCss3Alt />, name: "CSS3" },
+    { icon: <FaJs />, name: "JavaScript" },
+    { icon: <FaReact />, name: "React.js" },
     { icon: <SiTailwindcss />, name: "Tailwind CSS" },
-    { icon: <SiFastapi />, name: "FastAPI" },
-    { icon: <SiPython />, name: "Python" },
-    { icon: <SiDocker />, name: "Docker" },
-    { icon: <DiNodejsSmall />, name: "Node.js" },
+    { icon: <FaNodeJs />, name: "Node.js" },
+    { icon: <FaPython />, name: "Python" },
+    { icon: <SiOpencv />, name: "OpenCV" },
+    { icon: <SiFirebase />, name: "Firebase" },
     { icon: <SiMongodb />, name: "MongoDB" },
-    { icon: <SiAngular />, name: "Angular" },
+    { icon: <SiMysql />, name: "MySQL" },
+    { icon: <TbAutomation />, name: "Automation" },
+    { icon: <FaGitAlt />, name: "Git & GitHub" },
   ];
 
   const repeates = [...skills, ...skills];
@@ -76,31 +85,29 @@ export default function Skills() {
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
     };
-
-  },[active]);
-
+  }, [active]);
 
   useEffect(() => {
     let id;
     let last = performance.now();
     const speed = 80;
 
-    const tick = (now) =>{
-      const dt = (now-last)/1000;
+    const tick = (now) => {
+      const dt = (now - last) / 1000;
       last = now;
       let next = x.get() + speed * dir * dt;
-      const loop = trackRef.current?.scrollWidth/2 || 0;
+      const loop = trackRef.current?.scrollWidth / 2 || 0;
 
-      if(loop){
-        if(next <= -loop) next += loop;
-        if(next >= 0) next -= loop;
+      if (loop) {
+        if (next <= -loop) next += loop;
+        if (next >= 0) next -= loop;
       }
       x.set(next);
-      id = requestAnimationFrame(tick)
-    }
-    id = requestAnimationFrame(tick)
+      id = requestAnimationFrame(tick);
+    };
+    id = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(id);
-  },[dir,x])
+  }, [dir, x]);
 
   return (
     <section
@@ -139,7 +146,7 @@ export default function Skills() {
         <motion.div
           ref={trackRef}
           className="flex gap-10 text-6xl text-[#1cd8d2]"
-          style={{x, whitespace: "nowrap", willChange: "transform"}}
+          style={{ x, whitespace: "nowrap", willChange: "transform" }}
         >
           {repeates.map((s, i) => (
             <div
