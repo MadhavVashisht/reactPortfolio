@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import hotelDesktop from "../assets/hotelD.jpg"
 import hotelMobile from "../assets/hotelM.jpg"
 import jarvisDesktop from "../assets/jarvisD.jpg"
-import jarvisMobile from "../assets/Jarvism.jpg"
+import jarvisMobile from "../assets/JarvisM.jpg"
 import setaDesktop from "../assets/SETAD.jpg"
 import setaMobile from "../assets/SetaM.jpg"
 import saviskarDesktop from "../assets/SaviskarD.png"
