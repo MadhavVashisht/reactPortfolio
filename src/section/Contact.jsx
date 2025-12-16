@@ -1,13 +1,12 @@
 import { useState } from "react";
 import ParticlesBackground from "../component/ParticlesBackground";
 import emailjs from "@emailjs/browser";
-import Astra from "../assets/Astra.png"
-import {easeInOut, motion} from 'framer-motion'
+import Astra from "../assets/Astra.png";
+import { easeInOut, motion } from "framer-motion";
 
 const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-
 
 export default function Contact() {
   const [formData, setFromData] = useState({
@@ -34,26 +33,26 @@ export default function Contact() {
     required.forEach(
       (f) => !formData[f].trim() && (newErrors[f] = "This Feild is Required")
     );
-    if(formData.service!="other" && !formData.budget.trim())
+    if (formData.service != "other" && !formData.budget.trim())
       newErrors.budget = "This Feild is Required";
     setErrors(newErrors);
 
     return !Object.keys(newErrors).length;
   };
 
-  const handleSubmit = async(e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!validateFrom()) return;
+    if (!validateFrom()) return;
     setStatus("Sending");
 
-    try{
+    try {
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
           ...formData,
-          form_name : formData.name,
-          reply_to : formData.email
+          form_name: formData.name,
+          reply_to: formData.email,
         },
         PUBLIC_KEY
       );
@@ -65,11 +64,11 @@ export default function Contact() {
         budget: "",
         idea: "",
       });
-    }catch(err){
-        console.error("EmailJs Error: ", err);
-        setStatus("error");
+    } catch (err) {
+      console.error("EmailJs Error: ", err);
+      setStatus("error");
     }
-  }
+  };
 
   return (
     <section
@@ -79,75 +78,158 @@ export default function Contact() {
     >
       <ParticlesBackground />
       <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-10">
-        <motion.div className="w-full md:w-1/2 fles justify-center"
-        initial ={{opacity: 0, x: -50}}
-        whileInView ={{opacity: 1, x: 0}}
-        transition ={{duration: 0.6}}>
-          <motion.img src={Astra} alt="Contact" 
-          className="w-72 md:w-140 rounded-2xl shadow-lg object-cover"
-          animate ={{y:[0,-10,0]}}
-          transition = {{duration : 2, repeat: Infinity, ease: "easeInOut"}}/>
+        <motion.div
+          className="w-full md:w-1/2 fles justify-center"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.img
+            src={Astra}
+            alt="Contact"
+            className="w-72 md:w-140 rounded-2xl shadow-lg object-cover"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
         </motion.div>
         {/* right side */}
-        <motion.div className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
-        initial ={{opacity: 0, x: 50}}
-        whileInView ={{opacity: 1, x: 0}}
-        transition ={{duration: 0.6}}>
+        <motion.div
+          className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl font-bold mb-6">Lets Work Together</h2>
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             <div className="flex flex-col">
-              <label className="mb-1">Your Name <span className="text-red-500">*</span></label>
-              <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} 
-              className={`p-3 rounded-md bg-white/10 border ${errors.name? "border-red-500":"border-gray-500"} text-white 
-              focus:outline-none focus:border-blue-500`}/>
-              {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
+              <label className="mb-1">
+                Your Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                className={`p-3 rounded-md bg-white/10 border ${
+                  errors.name ? "border-red-500" : "border-gray-500"
+                } text-white 
+              focus:outline-none focus:border-blue-500`}
+              />
+              {errors.name && (
+                <p className="text-red-500 text-xs">{errors.name}</p>
+              )}
             </div>
             <div className="flex flex-col">
-              <label className="mb-1">Your Email <span className="text-red-500">*</span></label>
-              <input type="text" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} 
-              className={`p-3 rounded-md bg-white/10 border ${errors.email? "border-red-500":"border-gray-500"} text-white 
-              focus:outline-none focus:border-blue-500`}/>
-              {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+              <label className="mb-1">
+                Your Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`p-3 rounded-md bg-white/10 border ${
+                  errors.email ? "border-red-500" : "border-gray-500"
+                } text-white 
+              focus:outline-none focus:border-blue-500`}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs">{errors.email}</p>
+              )}
             </div>
             <div className="flex flex-col">
-              <label className="mb-1">Services Needed <span className="text-red-500">*</span></label>
-              <select name="service" value={formData.service} onChange={handleChange} className={`p-3 rounded-md bg-white/10 border ${errors.email? "border-red-500":"border-gray-500"} text-white 
-              focus:outline-none focus:border-blue-500`} >
-                <option value="" disabled>Something in Mind?</option>
-                <option value="Web Development" >Web Development</option>
-                <option value="Software Development" >Software Development</option>
-                <option value="other" >Other</option>
+              <label className="mb-1">
+                Services Needed <span className="text-red-500">*</span>
+              </label>
+              <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                className={`p-3 rounded-md bg-white/10 border ${
+                  errors.email ? "border-red-500" : "border-gray-500"
+                } text-white 
+              focus:outline-none focus:border-blue-500`}
+              >
+                <option value="" disabled>
+                  Something in Mind?
+                </option>
+                <option value="Web Development">Web Development</option>
+                <option value="Software Development">
+                  Software Development
+                </option>
+                <option value="other">Other</option>
               </select>
-              {errors.service && <p className="text-red-500 text-xs">{errors.service}</p>}
+              {errors.service && (
+                <p className="text-red-500 text-xs">{errors.service}</p>
+              )}
             </div>
             {formData.service && formData.service !== "other" && (
               <div className="flex flex-col">
-                <label className="mb-1">Budget <span className="text-red-500">*</span></label>
-                <input type="text" name="budget" placeholder="Your Budget" value={formData.budget} onChange={handleChange} 
-                className={`p-3 rounded-md bg-white/10 border ${errors.budget? "border-red-500":"border-gray-500"} text-white 
-                focus:outline-none focus:border-blue-500`}/>
-                {errors.budget && <p className="text-red-500 text-xs">{errors.budget}</p>}
+                <label className="mb-1">
+                  Budget <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="budget"
+                  placeholder="Your Budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  className={`p-3 rounded-md bg-white/10 border ${
+                    errors.budget ? "border-red-500" : "border-gray-500"
+                  } text-white 
+                focus:outline-none focus:border-blue-500`}
+                />
+                {errors.budget && (
+                  <p className="text-red-500 text-xs">{errors.budget}</p>
+                )}
               </div>
             )}
             <div className="flex flex-col">
-              <label className="mb-1">Idea <span className="text-red-500">*</span></label>
-              <textarea rows={5} name="idea" placeholder="Explain Your Idea" value={formData.idea} onChange={handleChange} 
-              className={`p-3 rounded-md bg-white/10 border ${errors.idea? "border-red-500":"border-gray-500"} text-white 
-              focus:outline-none focus:border-blue-500`}/>
-              {errors.idea && <p className="text-red-500 text-xs">{errors.idea}</p>}
+              <label className="mb-1">
+                Idea <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                rows={5}
+                name="idea"
+                placeholder="Explain Your Idea"
+                value={formData.idea}
+                onChange={handleChange}
+                className={`p-3 rounded-md bg-white/10 border ${
+                  errors.idea ? "border-red-500" : "border-gray-500"
+                } text-white 
+              focus:outline-none focus:border-blue-500`}
+              />
+              {errors.idea && (
+                <p className="text-red-500 text-xs">{errors.idea}</p>
+              )}
             </div>
             {status && (
-              <p className={`text-sm ${status==="success"? "text-green-500" : status === "error"? "text-red-400": "text-yellow-400"}`}>
-                {status==="sending"?"sending...": status === "success"? "Message Sent Succesfully ✅": "Something Went Wrong ❌"}
+              <p
+                className={`text-sm ${
+                  status === "success"
+                    ? "text-green-500"
+                    : status === "error"
+                    ? "text-red-400"
+                    : "text-yellow-400"
+                }`}
+              >
+                {status === "sending"
+                  ? "sending..."
+                  : status === "success"
+                  ? "Message Sent Succesfully ✅"
+                  : "Something Went Wrong ❌"}
               </p>
             )}
-            <motion.button className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-3 rounded-md font-semibold transition"
-            whileHover={{scale: 1.05}}
-            whileTap={{scale: 0.95}}
-            disabled = {status === "sending"}
-            type="submit"
+            <motion.button
+              className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-3 rounded-md font-semibold transition"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              disabled={status === "sending"}
+              type="submit"
             >
-              {status === "sending"? "Sending..." : "Send Message"}
+              {status === "sending" ? "Sending..." : "Send Message"}
             </motion.button>
           </form>
         </motion.div>
