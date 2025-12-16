@@ -12,25 +12,39 @@ import {
   useScroll,
 } from "framer-motion";
 
-const useIsMobile = (query = "(max-width : 639px)") => {
-  const [IsMobile, setIsMobile] = useState(
-    typeof window !== "undefined" && window.matchMedia(query).matches
-  );
+const useIsMobile = (query = "(max-width: 639px)") => {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
+
     const mql = window.matchMedia(query);
     const handler = (e) => setIsMobile(e.matches);
 
-    mql.addEventListener("change", handler);
     setIsMobile(mql.matches);
-    return () => mql.removeEventListener("change", handler);
+
+    if (mql.addEventListener) {
+      mql.addEventListener("change", handler);
+    } else {
+      mql.addListener(handler);
+    }
+
+    return () => {
+      if (mql.removeEventListener) {
+        mql.removeEventListener("change", handler);
+      } else {
+        mql.removeListener(handler);
+      }
+    };
   }, [query]);
-  return IsMobile;
+
+  return isMobile;
 };
 
 export default function Projects() {
   const isMobile = useIsMobile();
   const sceneRef = useRef(null);
+
   const projects = useMemo(
     () => [
       {
@@ -60,13 +74,13 @@ export default function Projects() {
     offset: ["start start", "end end"],
   });
 
-  const tresholds = projects.map((_, i) => (i + 1) / projects.length);
+  const thresholds = projects.map((_, i) => (i + 1) / projects.length);
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const idx = tresholds.findIndex((t) => v <= t);
-    setActiveIndex(idx === -1 ? tresholds.length - 1 : idx);
+    const idx = thresholds.findIndex((t) => v <= t);
+    setActiveIndex(idx === -1 ? thresholds.length - 1 : idx);
   });
 
   const activeProject = projects[activeIndex];
@@ -124,9 +138,11 @@ export default function Projects() {
                   </motion.h3>
                 )}
               </AnimatePresence>
+
+              {/* FIXED: Added space before ${ below */}
               <div
                 className={`relative w-full overflow-hidden bg-black/20 shadow-2xl 
-              md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)]${
+              md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] ${
                 isMobile ? "mb-6 rounded-b-lg" : "mb-10 sm:mb-12 rounded-xl"
               }
               h-[62vh] sm:h-[66vh]`}
@@ -159,14 +175,14 @@ export default function Projects() {
             </div>
           ))}
         </div>
-        <div
-          className={`absolute ${isMobile? "bottom-20": "bottom-10"}`}
-        >
-          <a href={activeProject?.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-6 py-3 font-semibold rounded-lg bg-white text-black hover:bg-gray-200 transition-all"
-          aria-label={`view${activeProject?.title}`}>
+        <div className={`absolute ${isMobile ? "bottom-20" : "bottom-10"}`}>
+          <a
+            href={activeProject?.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-3 font-semibold rounded-lg bg-white text-black hover:bg-gray-200 transition-all"
+            aria-label={`view ${activeProject?.title}`}
+          >
             View Project
           </a>
         </div>
