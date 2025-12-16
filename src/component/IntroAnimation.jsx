@@ -23,7 +23,7 @@ export default function IntroAnimation({ onfinish }) {
     } 
     // If we are at the last word, wait a moment, then trigger the exit
     else {
-      const timeout = setTimeout(() => setVisible(false), 2500);
+      const timeout = setTimeout(() => setVisible(false), 1000);
       return () => clearTimeout(timeout);
     }
   }, [index, greet.length]);
