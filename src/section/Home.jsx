@@ -8,7 +8,7 @@ import avatar from '../assets/avator.png';
 const socials = [
   { Icon: FaGithub, label: "Github", href: "https://github.com/MadhavVashisht" },
   { Icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/madhav-vashisht/" },
-  { Icon: FaXTwitter, label: "X", href: "" },
+  // { Icon: FaXTwitter, label: "X", href: "" },
 ];
 
 const glowVariant = {
@@ -120,7 +120,7 @@ export default function Home() {
               animate={{ opacity: 1, }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              <a href="#Projects"
+              <a href="#projects"
                 className="px-6 py-3 font-medium text-white bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] rounded-full shadow-lg hover:scale-105 transition-all">
                 View My Work
               </a>

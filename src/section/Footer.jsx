@@ -13,7 +13,7 @@ const socials = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/madhav-vashisht/",
   },
-  { Icon: FaXTwitter, label: "X", href: "" },
+  // { Icon: FaXTwitter, label: "X", href: "" },
 ];
 
 const glowVariant = {
