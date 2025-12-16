@@ -74,7 +74,7 @@ export default function Projects() {
         title: "SAVISKAR Official Site",
         description: "Live Event Website",
         link: "https://saviskar.co.in",
-        bgColor: "#10B981", // Emerald/Brand Green (Update this Hex to match exact logo if needed)
+        bgColor: "#0d4d3d", // Emerald/Brand Green (Update this Hex to match exact logo if needed)
         image: isMobile ? saviskarMobile : saviskarDesktop,
       },
     ],
