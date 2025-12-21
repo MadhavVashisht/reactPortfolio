@@ -31,10 +31,10 @@ export default function Contact() {
     const required = ["name", "email", "service", "idea"];
     const newErrors = {};
     required.forEach(
-      (f) => !formData[f].trim() && (newErrors[f] = "This Feild is Required")
+      (f) => !formData[f].trim() && (newErrors[f] = "This Field is Required")
     );
     if (formData.service != "other" && !formData.budget.trim())
-      newErrors.budget = "This Feild is Required";
+      newErrors.budget = "This Field is Required";
     setErrors(newErrors);
 
     return !Object.keys(newErrors).length;
@@ -43,7 +43,9 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateFrom()) return;
-    setStatus("Sending");
+
+    // FIX 1: Use lowercase "sending" to match your JSX check
+    setStatus("sending");
 
     try {
       await emailjs.send(
@@ -79,7 +81,7 @@ export default function Contact() {
       <ParticlesBackground />
       <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-10">
         <motion.div
-          className="w-full md:w-1/2 fles justify-center"
+          className="w-full md:w-1/2 flex justify-center"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -92,7 +94,7 @@ export default function Contact() {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
-        {/* right side */}
+
         <motion.div
           className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
           initial={{ opacity: 0, x: 50 }}
@@ -148,7 +150,7 @@ export default function Contact() {
                 value={formData.service}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.email ? "border-red-500" : "border-gray-500"
+                  errors.service ? "border-red-500" : "border-gray-500"
                 } text-white 
               focus:outline-none focus:border-blue-500`}
               >
@@ -205,6 +207,8 @@ export default function Contact() {
                 <p className="text-red-500 text-xs">{errors.idea}</p>
               )}
             </div>
+
+            {/* FIX 2: Updated render logic to handle "error" explicitly */}
             {status && (
               <p
                 className={`text-sm ${
@@ -216,12 +220,15 @@ export default function Contact() {
                 }`}
               >
                 {status === "sending"
-                  ? "sending..."
+                  ? "Sending..."
                   : status === "success"
                   ? "Message Sent Succesfully ✅"
-                  : "Something Went Wrong ❌"}
+                  : status === "error"
+                  ? "Something Went Wrong ❌"
+                  : null}
               </p>
             )}
+
             <motion.button
               className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-3 rounded-md font-semibold transition"
               whileHover={{ scale: 1.05 }}
