@@ -7,6 +7,8 @@ import setaDesktop from "../assets/SETAD.jpg"
 import setaMobile from "../assets/SetaM.jpg"
 import saviskarDesktop from "../assets/SaviskarD.png"
 import saviskarMobile from "../assets/SaviskarM.jpg"
+import NeuroNovaDesktop from "../assets/NeuroNovaD.png"
+import NeuroNovaMobile from "../assets/NeuroNovaM.jpg"
 import {
   motion,
   AnimatePresence,
@@ -76,6 +78,13 @@ export default function Projects() {
         link: "https://saviskar.co.in",
         bgColor: "#0d4d3d", // Emerald/Brand Green (Update this Hex to match exact logo if needed)
         image: isMobile ? saviskarMobile : saviskarDesktop,
+      },
+      {
+        title: "NeuroNova",
+        description: "A real-time YOLOv8-powered object detection platform built during a hackathon, focused on speed, usability, and deployment-readiness.",
+        link: "https://github.com/MadhavVashisht/NEURONOVA",
+        bgColor: "#0E1116 ",
+        image: isMobile ? NeuroNovaMobile : NeuroNovaDesktop,
       },
     ],
     [isMobile]
